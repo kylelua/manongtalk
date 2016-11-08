@@ -1,0 +1,599 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="设计模式," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.1" />
+
+
+
+
+
+
+<meta name="description" content="概念
+组合模式（Composite Pattern），又叫部分整体模式，是用于把一组相似的对象当作一个单一的对象。组合模式依据树形结构来组合对象，用来表示部分以及整体层次。这种类型的设计模式属于结构型模式，它创建了对象组的树形结构。这种模式创建了一个包含自己对象组的类。该类提供了修改相同对象组的方式。我们通过下面的实例来演示组合模式的用法。实例演示了一个组织中员工的层次结构。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="组合模式（Composite Pattern）">
+<meta property="og:url" content="http://manongtalk.com/2016/09/19/2016-09-19-composite/index.html">
+<meta property="og:site_name" content="码农说">
+<meta property="og:description" content="概念
+组合模式（Composite Pattern），又叫部分整体模式，是用于把一组相似的对象当作一个单一的对象。组合模式依据树形结构来组合对象，用来表示部分以及整体层次。这种类型的设计模式属于结构型模式，它创建了对象组的树形结构。这种模式创建了一个包含自己对象组的类。该类提供了修改相同对象组的方式。我们通过下面的实例来演示组合模式的用法。实例演示了一个组织中员工的层次结构。">
+<meta property="og:image" content="http://manongtalk.com/2016/09/19/2016-09-19-composite/composite.png">
+<meta property="og:updated_time" content="2016-11-05T20:49:39.081Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="组合模式（Composite Pattern）">
+<meta name="twitter:description" content="概念
+组合模式（Composite Pattern），又叫部分整体模式，是用于把一组相似的对象当作一个单一的对象。组合模式依据树形结构来组合对象，用来表示部分以及整体层次。这种类型的设计模式属于结构型模式，它创建了对象组的树形结构。这种模式创建了一个包含自己对象组的类。该类提供了修改相同对象组的方式。我们通过下面的实例来演示组合模式的用法。实例演示了一个组织中员工的层次结构。">
+<meta name="twitter:image" content="http://manongtalk.com/2016/09/19/2016-09-19-composite/composite.png">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 0,
+      author: '博主'
+    }
+  };
+</script>
+
+
+
+
+  <link rel="canonical" href="http://manongtalk.com/2016/09/19/2016-09-19-composite/"/>
+
+  <title> 组合模式（Composite Pattern） | 码农说 </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+            (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+          m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+  ga('create', 'UA-83962536-1', 'auto');
+  ga('send', 'pageview');
+</script>
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">码农说</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle">一个程序员的日常</p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                组合模式（Composite Pattern）
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-09-19T10:19:19-04:00" content="2016-09-19">
+              2016-09-19
+            </time>
+          </span>
+
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p><strong>概念</strong></p>
+<p>组合模式（Composite Pattern），又叫部分整体模式，是用于把一组相似的对象当作一个单一的对象。组合模式依据树形结构来组合对象，用来表示部分以及整体层次。这种类型的设计模式属于结构型模式，它创建了对象组的树形结构。这种模式创建了一个包含自己对象组的类。该类提供了修改相同对象组的方式。我们通过下面的实例来演示组合模式的用法。实例演示了一个组织中员工的层次结构。<br><a id="more"></a><br><em>意图：</em>将对象组合成树形结构以表示”部分-整体”的层次结构。组合模式使得用户对单个对象和组合对象的使用具有一致性。<br><em>主要解决：</em>它在我们树型结构的问题中，模糊了简单元素和复杂元素的概念，客户程序可以向处理简单元素一样来处理复杂元素，从而使得客户程序与复杂元素的内部结构解耦。<br><em>何时使用：</em><br>1、您想表示对象的部分-整体层次结构（树形结构）。<br>2、您希望用户忽略组合对象与单个对象的不同，用户将统一地使用组合结构中的所有对象。<br><em>如何解决：</em>树枝和叶子实现统一接口，树枝内部组合该接口。<br><em>关键代码：</em>树枝内部组合该接口，并且含有内部属性 List，里面放 Component。</p>
+<p><em>优点：</em><br>1、高层模块调用简单。<br>2、节点自由增加。<br><em>缺点：</em>在使用组合模式时，其叶子和树枝的声明都是实现类，而不是接口，违反了依赖倒置原则。<br><em>使用场景：</em>部分、整体场景，如树形菜单，文件、文件夹的管理。<br><em>注意事项：</em>定义时为具体类。</p>
+<p><strong>实现</strong></p>
+<p>我们有一个类 Employee，该类被当作组合模型类。CompositePatternDemo，我们的演示类使用 Employee 类来添加部门层次结构，并打印所有员工。</p>
+<img src="/2016/09/19/2016-09-19-composite/composite.png" alt="组合模式的 UML 图" title="组合模式的 UML 图">
+<p>创建 Employee 类，该类带有 Employee 对象的列表。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div></pre></td><td class="code"><pre><div class="line">Employee.java</div><div class="line">import java.util.ArrayList;</div><div class="line">import java.util.List;</div><div class="line"></div><div class="line">public class Employee &#123;</div><div class="line">   private String name;</div><div class="line">   private String dept;</div><div class="line">   private int salary;</div><div class="line">   private List&lt;Employee&gt; subordinates;</div><div class="line"></div><div class="line">   //构造函数</div><div class="line">   public Employee(String name,String dept, int sal) &#123;</div><div class="line">      this.name = name;</div><div class="line">      this.dept = dept;</div><div class="line">      this.salary = sal;</div><div class="line">      subordinates = new ArrayList&lt;Employee&gt;();</div><div class="line">   &#125;</div><div class="line"></div><div class="line">   public void add(Employee e) &#123;</div><div class="line">      subordinates.add(e);</div><div class="line">   &#125;</div><div class="line"></div><div class="line">   public void remove(Employee e) &#123;</div><div class="line">      subordinates.remove(e);</div><div class="line">   &#125;</div><div class="line"></div><div class="line">   public List&lt;Employee&gt; getSubordinates()&#123;</div><div class="line">     return subordinates;</div><div class="line">   &#125;</div><div class="line"></div><div class="line">   public String toString()&#123;</div><div class="line">      return (&quot;Employee :[ Name : &quot;+ name </div><div class="line">      +&quot;, dept : &quot;+ dept + &quot;, salary :&quot;</div><div class="line">      + salary+&quot; ]&quot;);</div><div class="line">   &#125;   </div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>使用 Employee 类来创建和打印员工的层次结构。<br>CompositePatternDemo.java<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div></pre></td><td class="code"><pre><div class="line">public class CompositePatternDemo &#123;</div><div class="line">   public static void main(String[] args) &#123;</div><div class="line">      Employee CEO = new Employee(&quot;John&quot;,&quot;CEO&quot;, 30000);</div><div class="line"></div><div class="line">      Employee headSales = new Employee(&quot;Robert&quot;,&quot;Head Sales&quot;, 20000);</div><div class="line"></div><div class="line">      Employee headMarketing = new Employee(&quot;Michel&quot;,&quot;Head Marketing&quot;, 20000);</div><div class="line"></div><div class="line">      Employee clerk1 = new Employee(&quot;Laura&quot;,&quot;Marketing&quot;, 10000);</div><div class="line">      Employee clerk2 = new Employee(&quot;Bob&quot;,&quot;Marketing&quot;, 10000);</div><div class="line"></div><div class="line">      Employee salesExecutive1 = new Employee(&quot;Richard&quot;,&quot;Sales&quot;, 10000);</div><div class="line">      Employee salesExecutive2 = new Employee(&quot;Rob&quot;,&quot;Sales&quot;, 10000);</div><div class="line"></div><div class="line">      CEO.add(headSales);</div><div class="line">      CEO.add(headMarketing);</div><div class="line"></div><div class="line">      headSales.add(salesExecutive1);</div><div class="line">      headSales.add(salesExecutive2);</div><div class="line"></div><div class="line">      headMarketing.add(clerk1);</div><div class="line">      headMarketing.add(clerk2);</div><div class="line"></div><div class="line">      //打印该组织的所有员工</div><div class="line">      System.out.println(CEO); </div><div class="line">      for (Employee headEmployee : CEO.getSubordinates()) &#123;</div><div class="line">         System.out.println(headEmployee);</div><div class="line">         for (Employee employee : headEmployee.getSubordinates()) &#123;</div><div class="line">            System.out.println(employee);</div><div class="line">         &#125;</div><div class="line">      &#125;		</div><div class="line">   &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>验证输出。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">Employee :[ Name : John, dept : CEO, salary :30000 ]</div><div class="line">Employee :[ Name : Robert, dept : Head Sales, salary :20000 ]</div><div class="line">Employee :[ Name : Richard, dept : Sales, salary :10000 ]</div><div class="line">Employee :[ Name : Rob, dept : Sales, salary :10000 ]</div><div class="line">Employee :[ Name : Michel, dept : Head Marketing, salary :20000 ]</div><div class="line">Employee :[ Name : Laura, dept : Marketing, salary :10000 ]</div><div class="line">Employee :[ Name : Bob, dept : Marketing, salary :10000 ]</div></pre></td></tr></table></figure></p>
+<p><strong>应用实例</strong><br>1、算术表达式包括操作数、操作符和另一个操作数，其中，另一个操作符也可以是操作树、操作符和另一个操作数。<br>2、在 JAVA AWT 和 SWING 中，对于 Button 和 Checkbox 是树叶，Container 是树枝。</p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/设计模式/" rel="tag">#设计模式</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/09/18/2016-09-16-filter/" rel="next" title="过滤器模式（Filter Pattern）或标准模式（Criteria Pattern）">
+                <i class="fa fa-chevron-left"></i> 过滤器模式（Filter Pattern）或标准模式（Criteria Pattern）
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2016/09/19/2016-09-19-decorate/" rel="prev" title="装饰器模式（Decorator Pattern）">
+                装饰器模式（Decorator Pattern） <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/show_me.jpg"
+               alt="卤蛋侠" />
+          <p class="site-author-name" itemprop="name">卤蛋侠</p>
+          <p class="site-description motion-element" itemprop="description"></p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">16</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">2</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <p class="post-toc-empty">此文章未包含目录</p>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2016</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">卤蛋侠</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.1"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.0.1"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.1"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
