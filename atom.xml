@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://manongtalk.com/"/>
-  <updated>2016-11-12T20:14:17.657Z</updated>
+  <updated>2016-11-05T20:50:01.000Z</updated>
   <id>http://manongtalk.com/</id>
   
   <author>
@@ -14,20 +14,6 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
-  
-  <entry>
-    <title>name</title>
-    <link href="http://manongtalk.com/2016/11/12/name/"/>
-    <id>http://manongtalk.com/2016/11/12/name/</id>
-    <published>2016-11-12T20:14:17.000Z</published>
-    <updated>2016-11-12T20:14:17.657Z</updated>
-    
-    <summary type="html">
-    
-    </summary>
-    
-    
-  </entry>
   
   <entry>
     <title>代理模式（Proxy Pattern）</title>
