@@ -2,6 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://manongtalk.com/tags/index.html</loc>
+    
+    <lastmod>2016-11-12T20:29:18.067Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>http://manongtalk.com/2016/09/04/2016-09-04-abs-factory/</loc>
     
     <lastmod>2016-11-12T20:24:18.305Z</lastmod>
@@ -12,13 +19,6 @@
     <loc>http://manongtalk.com/about/index.html</loc>
     
     <lastmod>2016-11-12T20:23:19.557Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://manongtalk.com/tags/index.html</loc>
-    
-    <lastmod>2016-11-12T20:22:45.345Z</lastmod>
     
   </url>
   
