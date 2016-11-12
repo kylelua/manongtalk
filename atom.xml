@@ -436,7 +436,7 @@
     <link href="http://manongtalk.com/2016/09/04/2016-09-04-abs-factory/"/>
     <id>http://manongtalk.com/2016/09/04/2016-09-04-abs-factory/</id>
     <published>2016-09-05T01:36:43.000Z</published>
-    <updated>2016-11-12T20:17:51.573Z</updated>
+    <updated>2016-11-12T20:24:18.305Z</updated>
     
     <content type="html"><![CDATA[<p><strong>工厂模式的简单回顾</strong></p>
 <p>在介绍了简单工厂模式和工厂方法模式之后，相信很多人对工厂模式（如果单独提到工厂模式，即包括简单工厂模式、工厂方法模式及本文即将介绍的抽象工厂模式）的思想都有了一定的理解。这里我们在简单回顾一下。<br><a id="more"></a><br>工厂模式的主要功能就是帮助我们实例化对象的。之所以名字中包含工厂模式四个字，是因为对象的实例化过程是通过工厂实现的，是用工厂方法代替new操作的。</p>
@@ -499,8 +499,6 @@
     
     
       <category term="设计模式" scheme="http://manongtalk.com/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/"/>
-    
-      <category term="Design Pattern" scheme="http://manongtalk.com/tags/Design-Pattern/"/>
     
   </entry>
   
