@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>单例模式（Singleton Pattern） | 码农说</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="概念单例模式（Singleton Pattern）是最简单的设计模式之一。这种类型的设计模式属于创建型模式。在 GOF 书中给出的定义为：保证一个类仅有一个实例，并提供一个访问它的全局访问点。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="单例模式（Singleton Pattern）">
+<meta property="og:url" content="http://manongtalk.com/2016/09/04/2016-09-04-design-pattern-singleton/index.html">
+<meta property="og:site_name" content="码农说">
+<meta property="og:description" content="概念单例模式（Singleton Pattern）是最简单的设计模式之一。这种类型的设计模式属于创建型模式。在 GOF 书中给出的定义为：保证一个类仅有一个实例，并提供一个访问它的全局访问点。">
+<meta property="og:updated_time" content="2016-11-05T20:48:32.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="单例模式（Singleton Pattern）">
+<meta name="twitter:description" content="概念单例模式（Singleton Pattern）是最简单的设计模式之一。这种类型的设计模式属于创建型模式。在 GOF 书中给出的定义为：保证一个类仅有一个实例，并提供一个访问它的全局访问点。">
+  
+    <link rel="alternate" href="/atom.xml" title="码农说" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">码农说</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/" id="subtitle">一个程序员的日常</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://manongtalk.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-2016-09-04-design-pattern-singleton" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/09/04/2016-09-04-design-pattern-singleton/" class="article-date">
+  <time datetime="2016-09-04T20:25:20.000Z" itemprop="datePublished">2016-09-04</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      单例模式（Singleton Pattern）
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p><strong>概念</strong><br>单例模式（Singleton Pattern）是最简单的设计模式之一。这种类型的设计模式属于创建型模式。在 GOF 书中给出的定义为：保证一个类仅有一个实例，并提供一个访问它的全局访问点。<br><a id="more"></a><br>单例模式一般体现在类声明中，单例的类负责创建自己的对象，同时确保只有单个对象被创建。这个类提供了一种访问其唯一的对象的方式，可以直接访问，不需要实例化该类的对象。</p>
+<p><strong>用途</strong><br>单例模式有以下两个优点：</p>
+<p>1.在内存里只有一个实例，减少了内存的开销，尤其是频繁的创建和销毁实例（比如网站首页页面缓存）。<br>2.避免对资源的多重占用（比如写文件操作）。</p>
+<p>有时候，我们在选择使用单例模式的时候，不仅仅考虑到其带来的优点，还有可能是有些场景就必须要单例。比如类似”一个党只能有一个主席”的情况。</p>
+<p><strong>实现方式</strong><br>我们知道，一个类的对象的产生是由类构造函数来完成的。如果一个类对外提供了public的构造方法，那么外界就可以任意创建该类的对象。所以，如果想限制对象的产生，一个办法就是将构造函数变为私有的(至少是受保护的)，使外面的类不能通过引用来产生对象。同时为了保证类的可用性，就必须提供一个自己的对象以及访问这个对象的静态方法。</p>
+
+<p><strong>饿汉式</strong><br>下面是一个简单的单例的实现：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">//Singleton example : 饿汉式</div><div class="line">public class Singleton &#123;</div><div class="line">    //在类内部实例化一个实例</div><div class="line">    private static Singleton instance = new Singleton();</div><div class="line">    //私有的构造函数,外部无法访问</div><div class="line">    private Singleton() &#123;</div><div class="line">    &#125;</div><div class="line">    //对外提供获取实例的静态方法</div><div class="line">    public static Singleton getInstance() &#123;</div><div class="line">        return instance;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>这就是一个简单的单例的实现，这种实现方式我们称之为饿汉式。所谓饿汉。这是个比较形象的比喻。对于一个饿汉来说，他希望他想要用到这个实例的时候就能够立即拿到，而不需要任何等待时间。所以，通过static的静态初始化方式，在该类第一次被加载的时候，就有一个Singleton的实例被创建出来了。这样就保证在第一次想要使用该对象时，他已经被初始化好了。</p>
+<p>饿汉式单例，在类被加载的时候对象就会实例化。这也许会造成不必要的消耗，因为有可能这个实例根本就不会被用到。而且，如果这个类被多次加载的话也会造成多次实例化。其实解决这个问题的方式有很多，下面提供两种解决方式，第一种是使用静态内部类的形式。第二种是使用懒汉式。</p>
+<p><strong>懒汉式</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">//Singleton example : 懒汉式</div><div class="line">public class Singleton &#123;</div><div class="line">    //定义实例</div><div class="line">    private static Singleton instance;</div><div class="line">    //私有构造方法</div><div class="line">    private Singleton()&#123;&#125;</div><div class="line">    //对外提供获取实例的静态方法</div><div class="line">    public static Singleton getInstance() &#123;</div><div class="line">        //在对象被使用的时候才实例化</div><div class="line">        if (instance == null) &#123;</div><div class="line">            instance = new Singleton();</div><div class="line">        &#125;</div><div class="line">        return instance;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>上面这种单例叫做懒汉式单例。懒汉，就是不会提前把实例创建出来，将类对自己的实例化延迟到第一次被引用的时候。getInstance方法的作用是希望该对象在第一次被使用的时候被new出来。</p>
+<p>有没有发现，其实这种懒汉式单例其实还存在一个问题，那就是线程安全问题。在多线程情况下，有可能两个线程同时进入if语句中，这样，在两个线程都从if中退出的时候就创建了两个不一样的对象。</p>
+<p>针对线程不安全的懒汉式的单例，其实解决方式很简单，就是给创建对象的步骤加锁：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">public class SynchronizedSingleton &#123;</div><div class="line">    //定义实例</div><div class="line">    private static SynchronizedSingleton instance;</div><div class="line">    //私有构造方法</div><div class="line">    private SynchronizedSingleton()&#123;&#125;</div><div class="line">    //对外提供获取实例的静态方法,对该方法加锁</div><div class="line">    public static synchronized SynchronizedSingleton getInstance() &#123;</div><div class="line">        //在对象被使用的时候才实例化</div><div class="line">        if (instance == null) &#123;</div><div class="line">            instance = new SynchronizedSingleton();</div><div class="line">        &#125;</div><div class="line">        return instance;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p><strong>枚举式</strong><br>在Java 1.5之前，实现单例一般只有以上几种办法，在Java 1.5之后，还有另外一种实现单例的方式，那就是使用枚举：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">public enum  Singleton &#123;</div><div class="line"></div><div class="line">    INSTANCE;</div><div class="line">    Singleton() &#123;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>这种方式是Effective Java作者Josh Bloch 提倡的方式，它不仅能避免多线程同步问题，而且还能防止反序列化重新创建新的对象可谓是很坚强的壁垒啊，在深度分析Java的枚举类型—-枚举的线程安全性及序列化问题中有详细介绍枚举的线程安全问题和序列化问题，不过，个人认为由于1.5中才加入enum特性，用这种方式写不免让人感觉生疏，在实际工作中，我也很少看见有人这么写过，但是不代表他不好。</p>
+<p><strong>总结</strong><br>本文中介绍了几种实现单例的方法，主要包括饿汉、懒汉、并发校验锁、枚举等。</p>
+<p>从单例的实现中，我们可以发现，一个简单的单例模式就能涉及到这么多知识。单例模式其实如果再深入讨论，还可以涉及到序列化和多线程下的同步锁。</p>
+<p>但是，在平时工作中，单例是需要慎用的。因为它造出的静态实例存在内存在不会轻易被释放。如果这个单例比较大就会吃掉很多内存资源，甚至引起崩溃。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://manongtalk.com/2016/09/04/2016-09-04-design-pattern-singleton/" data-id="civfgodzx00045ya0du30hjq4" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/设计模式/">设计模式</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2016/09/04/2016-09-04-simple-factory/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          简单工厂 (Simple Factory)
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2016/09/04/2016-09-04-design-pattern-overview/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">设计模式概述</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/杂谈/">杂谈</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/设计模式/">设计模式</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/杂谈/" style="font-size: 10px;">杂谈</a> <a href="/tags/设计模式/" style="font-size: 20px;">设计模式</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/10/">October 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/09/">September 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/">August 2016</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2016/10/05/2016-10-05-proxy/">代理模式（Proxy Pattern）</a>
+          </li>
+        
+          <li>
+            <a href="/2016/10/05/2016-10-05-facade/">外观模式（Facade Pattern）</a>
+          </li>
+        
+          <li>
+            <a href="/2016/09/19/2016-09-19-decorate/">装饰器模式（Decorator Pattern）</a>
+          </li>
+        
+          <li>
+            <a href="/2016/09/19/2016-09-19-composite/">组合模式（Composite Pattern）</a>
+          </li>
+        
+          <li>
+            <a href="/2016/09/18/2016-09-16-filter/">过滤器模式（Filter Pattern）或标准模式（Criteria Pattern）</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2016 卤蛋<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+  </div>
+</body>
+</html>

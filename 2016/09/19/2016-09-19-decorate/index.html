@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>装饰器模式（Decorator Pattern） | 码农说</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="概念
+装饰器模式（Decorator Pattern）允许向一个现有的对象添加新的功能，同时又不改变其结构。这种类型的设计模式属于结构型模式，它是作为现有的类的一个包装。这种模式创建了一个装饰类，用来包装原有的类，并在保持类方法签名完整性的前提下，提供了额外的功能。我们通过下面的实例来演示装饰器模式的用法。其中，我们将把一个形状装饰上不同的颜色，同时又不改变形状类。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="装饰器模式（Decorator Pattern）">
+<meta property="og:url" content="http://manongtalk.com/2016/09/19/2016-09-19-decorate/index.html">
+<meta property="og:site_name" content="码农说">
+<meta property="og:description" content="概念
+装饰器模式（Decorator Pattern）允许向一个现有的对象添加新的功能，同时又不改变其结构。这种类型的设计模式属于结构型模式，它是作为现有的类的一个包装。这种模式创建了一个装饰类，用来包装原有的类，并在保持类方法签名完整性的前提下，提供了额外的功能。我们通过下面的实例来演示装饰器模式的用法。其中，我们将把一个形状装饰上不同的颜色，同时又不改变形状类。">
+<meta property="og:updated_time" content="2016-11-05T20:49:45.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="装饰器模式（Decorator Pattern）">
+<meta name="twitter:description" content="概念
+装饰器模式（Decorator Pattern）允许向一个现有的对象添加新的功能，同时又不改变其结构。这种类型的设计模式属于结构型模式，它是作为现有的类的一个包装。这种模式创建了一个装饰类，用来包装原有的类，并在保持类方法签名完整性的前提下，提供了额外的功能。我们通过下面的实例来演示装饰器模式的用法。其中，我们将把一个形状装饰上不同的颜色，同时又不改变形状类。">
+  
+    <link rel="alternate" href="/atom.xml" title="码农说" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">码农说</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/" id="subtitle">一个程序员的日常</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://manongtalk.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-2016-09-19-decorate" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/09/19/2016-09-19-decorate/" class="article-date">
+  <time datetime="2016-09-19T19:33:07.000Z" itemprop="datePublished">2016-09-19</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      装饰器模式（Decorator Pattern）
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p><strong>概念</strong></p>
+<p>装饰器模式（Decorator Pattern）允许向一个现有的对象添加新的功能，同时又不改变其结构。这种类型的设计模式属于结构型模式，它是作为现有的类的一个包装。这种模式创建了一个装饰类，用来包装原有的类，并在保持类方法签名完整性的前提下，提供了额外的功能。我们通过下面的实例来演示装饰器模式的用法。其中，我们将把一个形状装饰上不同的颜色，同时又不改变形状类。<br><a id="more"></a><br><em>意图：</em>动态地给一个对象添加一些额外的职责。就增加功能来说，装饰器模式相比生成子类更为灵活。<br><em>主要解决：</em>一般的，我们为了扩展一个类经常使用继承方式实现，由于继承为类引入静态特征，并且随着扩展功能的增多，子类会很膨胀。<br><em>何时使用：</em>在不想增加很多子类的情况下扩展类。<br><em>如何解决：</em>将具体功能职责划分，同时继承装饰者模式。<br><em>关键代码：</em><br>1、Component 类充当抽象角色，不应该具体实现。<br>2、修饰类引用和继承 Component 类，具体扩展类重写父类方法。</p>
+<p><em>优点：</em>装饰类和被装饰类可以独立发展，不会相互耦合，装饰模式是继承的一个替代模式，装饰模式可以动态扩展一个实现类的功能。<br><em>缺点：</em>多层装饰比较复杂。<br><em>使用场景：</em><br>1、扩展一个类的功能。<br>2、动态增加功能，动态撤销。<br><em>注意事项：</em>可代替继承。</p>
+<p><strong>实现</strong></p>
+<p>我们将创建一个 Shape 接口和实现了 Shape 接口的实体类。然后我们创建一个实现了 Shape 接口的抽象装饰类 ShapeDecorator，并把 Shape 对象作为它的实例变量。RedShapeDecorator 是实现了 ShapeDecorator 的实体类。</p>
+<p>DecoratorPatternDemo，我们的演示类使用 RedShapeDecorator 来装饰 Shape 对象。</p>
+
+<p>创建一个接口。<br>Shape.java<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">public interface Shape &#123;</div><div class="line">   void draw();</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>创建实现接口的实体类。<br>Rectangle.java<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">public class Rectangle implements Shape &#123;</div><div class="line"></div><div class="line">   @Override</div><div class="line">   public void draw() &#123;</div><div class="line">      System.out.println(&quot;Shape: Rectangle&quot;);</div><div class="line">   &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>Circle.java<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">public class Circle implements Shape &#123;</div><div class="line"></div><div class="line">   @Override</div><div class="line">   public void draw() &#123;</div><div class="line">      System.out.println(&quot;Shape: Circle&quot;);</div><div class="line">   &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>创建实现了 Shape 接口的抽象装饰类。<br>ShapeDecorator.java<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">public abstract class ShapeDecorator implements Shape &#123;</div><div class="line">   protected Shape decoratedShape;</div><div class="line"></div><div class="line">   public ShapeDecorator(Shape decoratedShape)&#123;</div><div class="line">      this.decoratedShape = decoratedShape;</div><div class="line">   &#125;</div><div class="line"></div><div class="line">   public void draw()&#123;</div><div class="line">      decoratedShape.draw();</div><div class="line">   &#125;  </div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>创建扩展了 ShapeDecorator 类的实体装饰类。<br>RedShapeDecorator.java<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line">public class RedShapeDecorator extends ShapeDecorator &#123;</div><div class="line"></div><div class="line">   public RedShapeDecorator(Shape decoratedShape) &#123;</div><div class="line">      super(decoratedShape);     </div><div class="line">   &#125;</div><div class="line"></div><div class="line">   @Override</div><div class="line">   public void draw() &#123;</div><div class="line">      decoratedShape.draw();         </div><div class="line">      setRedBorder(decoratedShape);</div><div class="line">   &#125;</div><div class="line"></div><div class="line">   private void setRedBorder(Shape decoratedShape)&#123;</div><div class="line">      System.out.println(&quot;Border Color: Red&quot;);</div><div class="line">   &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>使用 RedShapeDecorator 来装饰 Shape 对象。<br>DecoratorPatternDemo.java<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line">public class DecoratorPatternDemo &#123;</div><div class="line">   public static void main(String[] args) &#123;</div><div class="line"></div><div class="line">      Shape circle = new Circle();</div><div class="line"></div><div class="line">      Shape redCircle = new RedShapeDecorator(new Circle());</div><div class="line"></div><div class="line">      Shape redRectangle = new RedShapeDecorator(new Rectangle());</div><div class="line">      System.out.println(&quot;Circle with normal border&quot;);</div><div class="line">      circle.draw();</div><div class="line"></div><div class="line">      System.out.println(&quot;\nCircle of red border&quot;);</div><div class="line">      redCircle.draw();</div><div class="line"></div><div class="line">      System.out.println(&quot;\nRectangle of red border&quot;);</div><div class="line">      redRectangle.draw();</div><div class="line">   &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>验证输出。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">Circle with normal border</div><div class="line">Shape: Circle</div><div class="line"></div><div class="line">Circle of red border</div><div class="line">Shape: Circle</div><div class="line">Border Color: Red</div><div class="line"></div><div class="line">Rectangle of red border</div><div class="line">Shape: Rectangle</div><div class="line">Border Color: Red</div></pre></td></tr></table></figure></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://manongtalk.com/2016/09/19/2016-09-19-decorate/" data-id="civfgoe3c000o5ya0p7gd0t77" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/设计模式/">设计模式</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2016/10/05/2016-10-05-facade/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          外观模式（Facade Pattern）
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2016/09/19/2016-09-19-composite/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">组合模式（Composite Pattern）</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/杂谈/">杂谈</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/设计模式/">设计模式</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/杂谈/" style="font-size: 10px;">杂谈</a> <a href="/tags/设计模式/" style="font-size: 20px;">设计模式</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/10/">October 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/09/">September 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/">August 2016</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2016/10/05/2016-10-05-proxy/">代理模式（Proxy Pattern）</a>
+          </li>
+        
+          <li>
+            <a href="/2016/10/05/2016-10-05-facade/">外观模式（Facade Pattern）</a>
+          </li>
+        
+          <li>
+            <a href="/2016/09/19/2016-09-19-decorate/">装饰器模式（Decorator Pattern）</a>
+          </li>
+        
+          <li>
+            <a href="/2016/09/19/2016-09-19-composite/">组合模式（Composite Pattern）</a>
+          </li>
+        
+          <li>
+            <a href="/2016/09/18/2016-09-16-filter/">过滤器模式（Filter Pattern）或标准模式（Criteria Pattern）</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2016 卤蛋<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+  </div>
+</body>
+</html>

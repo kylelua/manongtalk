@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>抽象工厂模式 (Abstract Factory Pattern) | 码农说</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="工厂模式的简单回顾
+在介绍了简单工厂模式和工厂方法模式之后，相信很多人对工厂模式（如果单独提到工厂模式，即包括简单工厂模式、工厂方法模式及本文即将介绍的抽象工厂模式）的思想都有了一定的理解。这里我们在简单回顾一下。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="抽象工厂模式 (Abstract Factory Pattern)">
+<meta property="og:url" content="http://manongtalk.com/2016/09/04/2016-09-04-abs-factory/index.html">
+<meta property="og:site_name" content="码农说">
+<meta property="og:description" content="工厂模式的简单回顾
+在介绍了简单工厂模式和工厂方法模式之后，相信很多人对工厂模式（如果单独提到工厂模式，即包括简单工厂模式、工厂方法模式及本文即将介绍的抽象工厂模式）的思想都有了一定的理解。这里我们在简单回顾一下。">
+<meta property="og:updated_time" content="2016-11-05T20:47:39.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="抽象工厂模式 (Abstract Factory Pattern)">
+<meta name="twitter:description" content="工厂模式的简单回顾
+在介绍了简单工厂模式和工厂方法模式之后，相信很多人对工厂模式（如果单独提到工厂模式，即包括简单工厂模式、工厂方法模式及本文即将介绍的抽象工厂模式）的思想都有了一定的理解。这里我们在简单回顾一下。">
+  
+    <link rel="alternate" href="/atom.xml" title="码农说" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">码农说</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/" id="subtitle">一个程序员的日常</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://manongtalk.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-2016-09-04-abs-factory" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/09/04/2016-09-04-abs-factory/" class="article-date">
+  <time datetime="2016-09-05T01:36:43.000Z" itemprop="datePublished">2016-09-04</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      抽象工厂模式 (Abstract Factory Pattern)
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p><strong>工厂模式的简单回顾</strong></p>
+<p>在介绍了简单工厂模式和工厂方法模式之后，相信很多人对工厂模式（如果单独提到工厂模式，即包括简单工厂模式、工厂方法模式及本文即将介绍的抽象工厂模式）的思想都有了一定的理解。这里我们在简单回顾一下。<br><a id="more"></a><br>工厂模式的主要功能就是帮助我们实例化对象的。之所以名字中包含工厂模式四个字，是因为对象的实例化过程是通过工厂实现的，是用工厂方法代替new操作的。</p>
+<p>这样做的好处是封装了对象的实例化细节，尤其是对于实例化较复杂或者对象的生命周期应该集中管理的情况。会给你系统带来更大的可扩展性和尽量少的修改量。</p>
+<p><strong>简单工厂模式的优缺点</strong></p>
+<p>优点：<br>1、屏蔽产品的具体实现，调用者只关心产品的接口。<br>2、实现简单</p>
+<p>缺点：<br>1、增加产品，需要修改工厂类，不符合开放-封闭原则<br>2、工厂类集中了所有实例的创建逻辑，违反了高内聚责任分配原则</p>
+<p><strong>工厂方法模式的优缺点</strong></p>
+<p>优点：<br>1、继承了简单工厂模式的优点<br>2、符合开放-封闭原则</p>
+<p>缺点：<br>1、增加产品，需要增加新的工厂类，导致系统类的个数成对增加，在一定程度上增加了系统的复杂性。</p>
+<p>本文要介绍了抽象工厂模式，是在简单工厂模式和工厂方法模式的基础上衍生出的另外一种创建型设计模式。</p>
+<p><strong>概念</strong></p>
+<p>抽象工厂模式(Abstract Factory Pattern)：提供一个创建一系列相关或相互依赖对象的接口，而无须指定它们具体的类。抽象工厂模式又称为Kit模式，属于对象创建型模式。</p>
+<p>抽象工厂模式提供了一种方式，可以将同一产品族的单独的工厂封装起来。在正常使用中，客户端程序需要创建抽象工厂的具体实现，然后使用抽象工厂作为接口来创建这一主题的具体对象。客户端程序不需要知道（或关心）它从这些内部的工厂方法中获得对象的具体类型，因为客户端程序仅使用这些对象的通用接口。抽象工厂模式将一组对象的实现细节与他们的一般使用分离开来。</p>
+<p><strong>产品族</strong></p>
+<p>来认识下什么是产品族: 位于不同产品等级结构中,功能相关的产品组成的家族。如下面的例子，就有两个产品族：跑车族和商务车族。</p>
+
+<p><strong>用途</strong></p>
+<p>抽象工厂模式和工厂方法模式一样，都符合开放-封闭原则。但是不同的是，工厂方法模式在增加一个具体产品的时候，都要增加对应的工厂。但是抽象工厂模式只有在新增一个类型的具体产品时才需要新增工厂。也就是说，工厂方法模式的一个工厂只能创建一个具体产品。而抽象工厂模式的一个工厂可以创建属于一类类型的多种具体产品。工厂创建产品的个数介于简单工厂模式和工厂方法模式之间。</p>
+<p>在以下情况下可以使用抽象工厂模式：</p>
+<p>1)一个系统不应当依赖于产品类实例如何被创建、组合和表达的细节，这对于所有类型的工厂模式都是重要的。<br>2)系统中有多于一个的产品族，而每次只使用其中某一产品族。<br>3)属于同一个产品族的产品将在一起使用，这一约束必须在系统的设计中体现出来。<br>4)系统提供一个产品类的库，所有的产品以同样的接口出现，从而使客户端不依赖于具体实现。</p>
+<p><strong>实现方式</strong></p>
+<p>抽象工厂模式包含如下角色：</p>
+<p>AbstractFactory(抽象工厂)：用于声明生成抽象产品的方法</p>
+<p>ConcreteFactory(具体工厂)：实现了抽象工厂声明的生成抽象产品的方法，生成一组具体产品，这些产品构成了一个产品族，每一个产品都位于某个产品等级结构中；</p>
+<p>AbstractProduct(抽象产品)：为每种产品声明接口，在抽象产品中定义了产品的抽象业务方法；</p>
+<p>Product(具体产品)：定义具体工厂生产的具体产品对象，实现抽象产品接口中定义的业务方法。</p>
+<p>本文的例子采用一个汽车代工厂造汽车的例子。假设我们是一家汽车代工厂商，我们负责给奔驰和特斯拉两家公司制造车子。我们简单的把奔驰车理解为需要加油的车，特斯拉为需要充电的车。其中奔驰车中包含跑车和商务车两种，特斯拉同样也包含奔驰车和商务车。</p>
+
+<p>以上场景，我们就可以把跑车和商务车分别对待，对于跑车有单独的工厂创建，商务车也有单独的工厂。这样，以后无论是再帮任何其他厂商造车，只要是跑车或者商务车我们都不需要再引入工厂。同样，如果我们要增加一种其他类型的车，比如越野车，我们也不需要对跑车或者商务车的任何东西做修改。</p>
+<p>下面是抽象产品，奔驰车和特斯拉车：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">public interface BenzCar &#123;</div><div class="line"></div><div class="line">    //加汽油</div><div class="line">    public void gasUp();</div><div class="line"></div><div class="line">&#125;</div><div class="line"></div><div class="line">public interface TeslaCar &#123;</div><div class="line"></div><div class="line">    //充电</div><div class="line">    public void charge();</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>下面是具体产品，奔驰跑车、奔驰商务车、特斯拉跑车、特斯拉商务车：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div></pre></td><td class="code"><pre><div class="line">public class BenzSportCar implements BenzCar &#123;</div><div class="line">    public void gasUp() &#123;</div><div class="line">        System.out.println(&quot;给我的奔驰跑车加最好的汽油&quot;);</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">public class BenzBusinessCar implements BenzCar&#123;</div><div class="line">    public void gasUp() &#123;</div><div class="line">        System.out.println(&quot;给我的奔驰商务车加一般的汽油&quot;);</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">public class TeslaSportCar implements TeslaCar &#123;</div><div class="line">    public void charge() &#123;</div><div class="line">        System.out.println(&quot;给我特斯拉跑车冲满电&quot;);</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">public class TeslaBusinessCar implements TeslaCar &#123;</div><div class="line">    public void charge() &#123;</div><div class="line">        System.out.println(&quot;给我特斯拉商务车冲满电&quot;);</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>下面是抽象工厂：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">public interface CarFactory &#123;</div><div class="line"></div><div class="line">    public BenzCar getBenzCar();</div><div class="line">    public TeslaCar getTeslaCar();</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>下面是具体工厂：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line">public class SportCarFactory implements CarFactory &#123;</div><div class="line">    public BenzCar getBenzCar() &#123;</div><div class="line">        return new BenzSportCar();</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    public TeslaCar getTeslaCar() &#123;</div><div class="line">        return new TeslaSportCar();</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">public class BusinessCarFactory implements CarFactory &#123;</div><div class="line">    public BenzCar getBenzCar() &#123;</div><div class="line">        return new BenzBusinessCar();</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    public TeslaCar getTeslaCar() &#123;</div><div class="line">        return new TeslaBusinessCar();</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p><strong>“开闭原则”的倾斜性</strong></p>
+<p>“开闭原则”要求系统对扩展开放，对修改封闭，通过扩展达到增强其功能的目的。对于涉及到多个产品族与多个产品等级结构的系统，其功能增强包括两方面：</p>
+<p>增加产品族：对于增加新的产品族，工厂方法模式很好的支持了“开闭原则”，对于新增加的产品族，只需要对应增加一个新的具体工厂即可，对已有代码无须做任何修改。</p>
+<p>增加新的产品等级结构：对于增加新的产品等级结构，需要修改所有的工厂角色，包括抽象工厂类，在所有的工厂类中都需要增加生产新产品的方法，不能很好地支持“开闭原则”。</p>
+<p>抽象工厂模式的这种性质称为“开闭原则”的倾斜性，抽象工厂模式以一种倾斜的方式支持增加新的产品，它为新产品族的增加提供方便，但不能为新的产品等级结构的增加提供这样的方便。</p>
+<p><strong>三种工厂模式之间的关系</strong></p>
+<p>当抽象工厂模式中每一个具体工厂类只创建一个产品对象，也就是只存在一个产品等级结构时，抽象工厂模式退化成工厂方法模式；</p>
+<p>抽象工厂模式与工厂方法模式最大的区别在于，工厂方法模式针对的是一个产品等级结构，而抽象工厂模式则需要面对多个产品等级结构。</p>
+<p>当工厂方法模式中抽象工厂与具体工厂合并，提供一个统一的工厂来创建产品对象，并将创建对象的工厂方法设计为静态方法时，工厂方法模式退化成简单工厂模式。</p>
+<p><strong>总结</strong></p>
+<p>抽象工厂模式提供一个创建一系列相关或相互依赖对象的接口，而无须指定它们具体的类。抽象工厂模式又称为Kit模式，属于对象创建型模式。</p>
+<p>抽象工厂模式是所有形式的工厂模式中最为抽象和最具一般性的一种形态。</p>
+<p>抽象工厂模式的主要优点是隔离了具体类的生成，使得客户并不需要知道什么被创建，而且每次可以通过具体工厂类创建一个产品族中的多个对象，增加或者替换产品族比较方便，增加新的具体工厂和产品族很方便；主要缺点在于增加新的产品等级结构很复杂，需要修改抽象工厂和所有的具体工厂类，对“开闭原则”的支持呈现倾斜性。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://manongtalk.com/2016/09/04/2016-09-04-abs-factory/" data-id="civfgodzk00015ya05h1yzjlq" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/设计模式/">设计模式</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2016/09/04/2016-09-04-factory-compare/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          工厂模式小结
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2016/09/04/2016-09-04-factory-method/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">工厂方法模式 (Factory Method Pattern)</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/杂谈/">杂谈</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/设计模式/">设计模式</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/杂谈/" style="font-size: 10px;">杂谈</a> <a href="/tags/设计模式/" style="font-size: 20px;">设计模式</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/10/">October 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/09/">September 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/">August 2016</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2016/10/05/2016-10-05-proxy/">代理模式（Proxy Pattern）</a>
+          </li>
+        
+          <li>
+            <a href="/2016/10/05/2016-10-05-facade/">外观模式（Facade Pattern）</a>
+          </li>
+        
+          <li>
+            <a href="/2016/09/19/2016-09-19-decorate/">装饰器模式（Decorator Pattern）</a>
+          </li>
+        
+          <li>
+            <a href="/2016/09/19/2016-09-19-composite/">组合模式（Composite Pattern）</a>
+          </li>
+        
+          <li>
+            <a href="/2016/09/18/2016-09-16-filter/">过滤器模式（Filter Pattern）或标准模式（Criteria Pattern）</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2016 卤蛋<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+  </div>
+</body>
+</html>
