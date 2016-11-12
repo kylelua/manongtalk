@@ -2,6 +2,20 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://manongtalk.com/2016/09/04/2016-09-04-simple-factory/</loc>
+    
+    <lastmod>2016-11-12T23:10:27.022Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://manongtalk.com/2016/11/09/2016-11-10-archi-01/</loc>
+    
+    <lastmod>2016-11-12T23:09:30.782Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>http://manongtalk.com/tags/index.html</loc>
     
     <lastmod>2016-11-12T20:29:18.067Z</lastmod>
@@ -82,13 +96,6 @@
     <loc>http://manongtalk.com/2016/09/05/2016-09-05-builder/</loc>
     
     <lastmod>2016-11-05T20:49:08.000Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://manongtalk.com/2016/09/04/2016-09-04-simple-factory/</loc>
-    
-    <lastmod>2016-11-05T20:49:02.000Z</lastmod>
     
   </url>
   
