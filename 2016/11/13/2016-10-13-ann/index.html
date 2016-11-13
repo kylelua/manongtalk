@@ -7,7 +7,7 @@
 <p><img src="https://raw.githubusercontent.com/kylelua/manongtalk/master/img/2016-10-13-ann/table2.png" alt=""></p>
 <p>训练的过程如下：</p>
 <ol>
-<li><p>向前推进：<br>把输入的参数加权求和（权重为随机数）：<br><em>Y = Weight1 x Input1 + Weight2 x Input2 + Wight3 x Input3</em><br>把求和的结果通过sigmoid函数归一化，从而获得一个0和1之间的结果。<br>注：sigmoid 函数公式为  <em>y = 1 / (1 + exp(-x))</em></p>
+<li><p>向前推进：<br>把输入的参数加权求和（权重为随机数）：<br><strong>Y = Weight1 x Input1 + Weight2 x Input2 + Wight3 x Input3</strong><br>把求和的结果通过sigmoid函数归一化，从而获得一个0和1之间的结果。<br>注：sigmoid 函数公式为  <em>Y = 1 / (1 + exp(-X))</em></p>
 </li>
 <li><p>向后检验：<br>计算误差。在我们的例子中，我把误差定义为真实的输出于预测输出的差。之后我们根据误差重新调整权重。设 权重Weight, 误差Error, 输入Input, 输出Output, 则公式如下：<br><em>Weight = Weight + Error x Input x Output x ( 1 - Output )</em></p>
 </li>
