@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://manongtalk.com/"/>
-  <updated>2016-11-13T21:12:18.347Z</updated>
+  <updated>2016-11-13T21:15:12.990Z</updated>
   <id>http://manongtalk.com/</id>
   
   <author>
@@ -20,7 +20,7 @@
     <link href="http://manongtalk.com/2016/11/13/2016-10-13-ann/"/>
     <id>http://manongtalk.com/2016/11/13/2016-10-13-ann/</id>
     <published>2016-11-13T21:05:36.000Z</published>
-    <updated>2016-11-13T21:12:18.347Z</updated>
+    <updated>2016-11-13T21:15:12.990Z</updated>
     
     <content type="html"><![CDATA[<p>人工神经网络(Artificial Neural Network，ANN)的最初灵感来自于大脑神经系统的工作方式。人们的大脑通过从例子中总结经验来学习新的东西。经过训练的ANN同样可以用于图像识别和数据分类。生物学告诉我们，大脑里有大量的神经元，构成了复杂的网络。每个神经元之间通过突触传递介质（如：乙酰胆碱，多巴胺等）从而传递信息。我们可以把模型简化为：每个神经元可以许多其它神经细胞对其进行输入，然后它把这些输入加权，如果加权后的值高于一定阈值，则会激发该细胞产生一个输出。<br><a id="more"></a><br><img src="https://raw.githubusercontent.com/kylelua/manongtalk/master/img/2016-10-13-ann/Artificial-neural-network.png" alt=""></p>
 <p>在计算机科学中， 我们完全可以模仿这个生物过程，造出一个人造神经网络。这个神经网络其实可以理解为生物神经系统的抽象。为了做简单说明，这篇文章把只考虑一个非常简化的模型：网络只有两层；并且试图解决一个线性的归类问题。</p>
@@ -31,9 +31,9 @@
 <p><img src="https://raw.githubusercontent.com/kylelua/manongtalk/master/img/2016-10-13-ann/table2.png" alt=""></p>
 <p>训练的过程如下：</p>
 <ol>
-<li><p>向前推进：<br>把输入的参数加权求和（权重为随机数）：<br>Y = Weight1 <em> Input1 + Weight2 </em> Input2 + Wight3 * Input3<br>把求和的结果通过sigmoid函数归一化，从而获得一个0和1之间的结果。<br>注：sigmoid 函数公式为  y = 1 / (1 + exp(-x))</p>
+<li><p>向前推进：<br>把输入的参数加权求和（权重为随机数）：<br><em>Y = Weight1 x Input1 + Weight2 x Input2 + Wight3 x Input3</em><br>把求和的结果通过sigmoid函数归一化，从而获得一个0和1之间的结果。<br>注：sigmoid 函数公式为  <em>y = 1 / (1 + exp(-x))</em></p>
 </li>
-<li><p>向后检验：<br>计算误差。在我们的例子中，我把误差定义为真实的输出于预测输出的差。之后我们根据误差重新调整权重。设 权重Weight, 误差Error, 输入Input, 输出Output, 则公式如下：<br>Weight = Weight + Error <em> Input </em> Output * ( 1 - Output )</p>
+<li><p>向后检验：<br>计算误差。在我们的例子中，我把误差定义为真实的输出于预测输出的差。之后我们根据误差重新调整权重。设 权重Weight, 误差Error, 输入Input, 输出Output, 则公式如下：<br><em>Weight = Weight + Error x Input x Output x ( 1 - Output )</em></p>
 </li>
 </ol>
 <p>反复重复以上步骤。</p>
