@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://manongtalk.com/"/>
-  <updated>2016-11-13T05:26:48.907Z</updated>
+  <updated>2016-11-13T05:28:21.227Z</updated>
   <id>http://manongtalk.com/</id>
   
   <author>
@@ -17,13 +17,12 @@
   
   <entry>
     <title>所谓架构，即非架构，是名架构</title>
-    <link href="http://manongtalk.com/2016/11/13/2016-11-12-archi-03/"/>
-    <id>http://manongtalk.com/2016/11/13/2016-11-12-archi-03/</id>
-    <published>2016-11-13T05:21:57.000Z</published>
-    <updated>2016-11-13T05:26:48.907Z</updated>
+    <link href="http://manongtalk.com/2016/11/12/2016-11-12-archi-03/"/>
+    <id>http://manongtalk.com/2016/11/12/2016-11-12-archi-03/</id>
+    <published>2016-11-12T05:21:57.000Z</published>
+    <updated>2016-11-13T05:28:21.227Z</updated>
     
-    <content type="html"><![CDATA[<p>世上本没有架构，关注点一分离，就有了架构。</p>
-<p>人们不断将各种关注点分离，形成了不同的架构风格。然而是否分离、何时分离、怎样分离，却是“运用之妙，存乎一心”。</p>
+    <content type="html"><![CDATA[<p>世上本没有架构，关注点一分离，就有了架构。<br><a id="more"></a><br>人们不断将各种关注点分离，形成了不同的架构风格。然而是否分离、何时分离、怎样分离，却是“运用之妙，存乎一心”。</p>
 <p>Facebook实现了社会关系数据和隐私设定的关注点分离，运用的手段是云计算，提出了新的Web应用架构，PaaS Facebook Web Service API和FBQL是对数据持久的关注点分离，FBML和JS库是对数据展现的关注点分离。还是三层架构，没有新东西。人们总是和过去的自己只有一点点不同。</p>
 <p>凡所有相，皆是虚妄，若见诸相非相，即见如来。</p>
 <p>凡夫者，如来说即非凡夫，是名凡夫。</p>
@@ -31,9 +30,7 @@
     
     <summary type="html">
     
-      &lt;p&gt;世上本没有架构，关注点一分离，就有了架构。&lt;/p&gt;
-&lt;p&gt;人们不断将各种关注点分离，形成了不同的架构风格。然而是否分离、何时分离、怎样分离，却是“运用之妙，存乎一心”。&lt;/p&gt;
-&lt;p&gt;Facebook实现了社会关系数据和隐私设定的关注点分离，运用的手段是云计算，提出了新的W
+      &lt;p&gt;世上本没有架构，关注点一分离，就有了架构。&lt;br&gt;
     
     </summary>
     
