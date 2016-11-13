@@ -2,6 +2,104 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://manongtalk.com/2016/10/05/2016-10-05-proxy/</loc>
+    
+    <lastmod>2016-11-13T03:05:38.169Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://manongtalk.com/2016/10/05/2016-10-05-facade/</loc>
+    
+    <lastmod>2016-11-13T03:05:10.585Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://manongtalk.com/2016/09/19/2016-09-19-decorate/</loc>
+    
+    <lastmod>2016-11-13T03:04:11.209Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://manongtalk.com/2016/09/19/2016-09-19-composite/</loc>
+    
+    <lastmod>2016-11-13T03:03:29.901Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://manongtalk.com/2016/09/18/2016-09-16-prototype/</loc>
+    
+    <lastmod>2016-11-13T03:02:59.341Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://manongtalk.com/2016/09/18/2016-09-16-filter/</loc>
+    
+    <lastmod>2016-11-13T03:02:27.605Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://manongtalk.com/2016/09/18/2016-09-16-bridge/</loc>
+    
+    <lastmod>2016-11-13T02:46:56.553Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://manongtalk.com/2016/09/18/2016-09-16-adapter/</loc>
+    
+    <lastmod>2016-11-13T02:42:43.649Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://manongtalk.com/2016/09/05/2016-09-05-builder/</loc>
+    
+    <lastmod>2016-11-13T02:38:12.459Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://manongtalk.com/2016/09/04/2016-09-04-simple-factory/</loc>
+    
+    <lastmod>2016-11-13T02:37:26.799Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://manongtalk.com/2016/09/04/2016-09-04-factory-method/</loc>
+    
+    <lastmod>2016-11-13T02:36:46.667Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://manongtalk.com/2016/09/04/2016-09-04-factory-compare/</loc>
+    
+    <lastmod>2016-11-13T02:36:00.763Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://manongtalk.com/2016/09/04/2016-09-04-design-pattern-singleton/</loc>
+    
+    <lastmod>2016-11-13T02:35:27.379Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://manongtalk.com/2016/09/04/2016-09-04-design-pattern-overview/</loc>
+    
+    <lastmod>2016-11-13T02:34:45.147Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>http://manongtalk.com/2016/09/04/2016-09-04-abs-factory/</loc>
     
     <lastmod>2016-11-13T02:23:44.823Z</lastmod>
@@ -16,13 +114,6 @@
   </url>
   
   <url>
-    <loc>http://manongtalk.com/2016/09/04/2016-09-04-simple-factory/</loc>
-    
-    <lastmod>2016-11-12T23:10:27.022Z</lastmod>
-    
-  </url>
-  
-  <url>
     <loc>http://manongtalk.com/2016/11/09/2016-11-10-archi-01/</loc>
     
     <lastmod>2016-11-12T23:09:30.782Z</lastmod>
@@ -33,97 +124,6 @@
     <loc>http://manongtalk.com/tags/index.html</loc>
     
     <lastmod>2016-11-12T20:29:18.067Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://manongtalk.com/2016/10/05/2016-10-05-proxy/</loc>
-    
-    <lastmod>2016-11-05T20:50:01.000Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://manongtalk.com/2016/10/05/2016-10-05-facade/</loc>
-    
-    <lastmod>2016-11-05T20:49:53.000Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://manongtalk.com/2016/09/19/2016-09-19-decorate/</loc>
-    
-    <lastmod>2016-11-05T20:49:45.000Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://manongtalk.com/2016/09/19/2016-09-19-composite/</loc>
-    
-    <lastmod>2016-11-05T20:49:39.000Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://manongtalk.com/2016/09/18/2016-09-16-prototype/</loc>
-    
-    <lastmod>2016-11-05T20:49:32.000Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://manongtalk.com/2016/09/18/2016-09-16-filter/</loc>
-    
-    <lastmod>2016-11-05T20:49:26.000Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://manongtalk.com/2016/09/18/2016-09-16-bridge/</loc>
-    
-    <lastmod>2016-11-05T20:49:21.000Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://manongtalk.com/2016/09/18/2016-09-16-adapter/</loc>
-    
-    <lastmod>2016-11-05T20:49:15.000Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://manongtalk.com/2016/09/05/2016-09-05-builder/</loc>
-    
-    <lastmod>2016-11-05T20:49:08.000Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://manongtalk.com/2016/09/04/2016-09-04-factory-method/</loc>
-    
-    <lastmod>2016-11-05T20:48:56.000Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://manongtalk.com/2016/09/04/2016-09-04-factory-compare/</loc>
-    
-    <lastmod>2016-11-05T20:48:46.000Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://manongtalk.com/2016/09/04/2016-09-04-design-pattern-singleton/</loc>
-    
-    <lastmod>2016-11-05T20:48:32.000Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://manongtalk.com/2016/09/04/2016-09-04-design-pattern-overview/</loc>
-    
-    <lastmod>2016-11-05T20:48:21.000Z</lastmod>
     
   </url>
   
