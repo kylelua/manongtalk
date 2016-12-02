@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://manongtalk.com/"/>
-  <updated>2016-12-02T03:21:02.814Z</updated>
+  <updated>2016-12-02T03:23:18.214Z</updated>
   <id>http://manongtalk.com/</id>
   
   <author>
@@ -20,7 +20,7 @@
     <link href="http://manongtalk.com/2016/12/01/2016-12-01-deeplearning1/"/>
     <id>http://manongtalk.com/2016/12/01/2016-12-01-deeplearning1/</id>
     <published>2016-12-02T03:12:48.000Z</published>
-    <updated>2016-12-02T03:21:02.814Z</updated>
+    <updated>2016-12-02T03:23:18.214Z</updated>
     
     <content type="html"><![CDATA[<p><strong>深度学习是啥</strong></p>
 <p>在人工智能领域，有一个方法叫机器学习。在机器学习这个方法里，有一类算法叫神经网络。神经网络如下图所示：</p>
@@ -76,9 +76,9 @@
     </summary>
     
     
-      <category term="深度学习" scheme="http://manongtalk.com/tags/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/"/>
+      <category term="AI" scheme="http://manongtalk.com/tags/AI/"/>
     
-      <category term="人工智能" scheme="http://manongtalk.com/tags/%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD/"/>
+      <category term="深度学习" scheme="http://manongtalk.com/tags/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/"/>
     
   </entry>
   
