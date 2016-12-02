@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://manongtalk.com/"/>
-  <updated>2016-11-29T19:49:36.281Z</updated>
+  <updated>2016-12-02T03:14:38.917Z</updated>
   <id>http://manongtalk.com/</id>
   
   <author>
@@ -16,11 +16,77 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>深度学习入门(1)：感知器</title>
+    <link href="http://manongtalk.com/2016/12/01/2016-12-01-deeplearning1/"/>
+    <id>http://manongtalk.com/2016/12/01/2016-12-01-deeplearning1/</id>
+    <published>2016-12-02T03:12:48.000Z</published>
+    <updated>2016-12-02T03:14:38.917Z</updated>
+    
+    <content type="html"><![CDATA[<p><strong>深度学习是啥</strong></p>
+<p>在人工智能领域，有一个方法叫机器学习。在机器学习这个方法里，有一类算法叫神经网络。神经网络如下图所示：</p>
+<p><img src="https://raw.githubusercontent.com/kylelua/manongtalk/master/img/2016-12-01-deep-learning/img1.png" alt=""></p>
+<p>上图中每个圆圈都是一个神经元，每条线表示神经元之间的连接。我们可以看到，上面的神经元被分成了多层，层与层之间的神经元有连接，而层内之间的神经元没有连接。最左边的层叫做输入层，这层负责接收输入数据；最右边的层叫输出层，我们可以从这层获取神经网络输出数据。输入层和输出层之间的层叫做隐藏层。</p>
+<p>隐藏层比较多（大于2）的神经网络叫做深度神经网络。而深度学习，就是使用深层架构（比如，深度神经网络）的机器学习方法。</p>
+<p>那么深层网络和浅层网络相比有什么优势呢？简单来说深层网络能够表达力更强。事实上，一个仅有一个隐藏层的神经网络就能拟合任何一个函数，但是它需要很多很多的神经元。而深层网络用少得多的神经元就能拟合同样的函数。也就是为了拟合一个函数，要么使用一个浅而宽的网络，要么使用一个深而窄的网络。而后者往往更节约资源。</p>
+<p>深层网络也有劣势，就是它不太容易训练。简单的说，你需要大量的数据，很多的技巧才能训练好一个深层网络。这是个手艺活。</p>
+<p><strong>感知器</strong></p>
+<p>看到这里，如果你还是一头雾水，那也是很正常的。为了理解神经网络，我们应该先理解神经网络的组成单元——神经元。神经元也叫做感知器。感知器算法在上个世纪50-70年代很流行，也成功解决了很多问题。并且，感知器算法也是非常简单的。</p>
+<p><strong>感知器的定义</strong></p>
+<p>下图是一个感知器：</p>
+<p><img src="https://raw.githubusercontent.com/kylelua/manongtalk/master/img/2016-12-01-deep-learning/img2.png" alt=""></p>
+<p>可以看到，一个感知器有如下组成部分：</p>
+<p>1) <em>输入权值</em> 一个感知器可以接收多个输入(x1, x2, … , xn)，每个输入上有一个权值(w0, w1, …, wn)，此外还有一个偏置项b，就是上图中的w0。</p>
+<p>2) <em>激活函数</em> 感知器的激活函数可以有很多选择，比如我们可以选择下面这个阶跃函数来作为激活函数：</p>
+<p><img src="https://raw.githubusercontent.com/kylelua/manongtalk/master/img/2016-12-01-deep-learning/img3.png" alt=""></p>
+<p>3) <em>输出</em> 感知器的输出由下面这个公式来计算</p>
+<p><img src="https://raw.githubusercontent.com/kylelua/manongtalk/master/img/2016-12-01-deep-learning/img4.png" alt=""></p>
+<p>接下来我们用一个简单的例子来帮助理解。</p>
+<p><em>例子：用感知器实现and函数</em></p>
+<p>我们设计一个感知器，让它来实现and运算。程序员都知道，and是一个二元函数（带有两个参数和），下面是它的真值表：</p>
+<p><img src="https://raw.githubusercontent.com/kylelua/manongtalk/master/img/2016-12-01-deep-learning/img5.png" alt=""></p>
+<p>为了计算方便，我们用0表示false，用1表示true。这没什么难理解的，对于C语言程序员来说，这是天经地义的。</p>
+<p>我们令<br><img src="https://raw.githubusercontent.com/kylelua/manongtalk/master/img/2016-12-01-deep-learning/img6.png" alt=""><br>而激活函数就是前面写出来的阶跃函数，这时，感知器就相当于and函数。不明白？我们验算一下：</p>
+<p>输入上面真值表的第一行，即，那么根据公式(1)，计算输出：<br><img src="https://raw.githubusercontent.com/kylelua/manongtalk/master/img/2016-12-01-deep-learning/img7.png" alt=""></p>
+<p>也就是当都为0的时候，为0，这就是真值表的第一行。读者可以自行验证上述真值表的第二、三、四行。</p>
+<p><strong>感知器还能做什么</strong></p>
+<p>事实上，感知器不仅仅能实现简单的布尔运算。它可以拟合任何的线性函数，任何线性分类或线性回归问题都可以用感知器来解决。前面的布尔运算可以看作是二分类问题，即给定一个输入，输出0（属于分类0）或1（属于分类1）。如下面所示，and运算是一个线性分类问题，即可以用一条直线把分类0（false，红叉表示）和分类1（true，绿点表示）分开。</p>
+<p><img src="https://raw.githubusercontent.com/kylelua/manongtalk/master/img/2016-12-01-deep-learning/img8.png" alt=""></p>
+<p>然而，感知器却不能实现异或运算，如下图所示，异或运算不是线性的，你无法用一条直线把分类0和分类1分开。</p>
+<p><img src="https://raw.githubusercontent.com/kylelua/manongtalk/master/img/2016-12-01-deep-learning/img9.png" alt=""></p>
+<p><strong>感知器的训练</strong></p>
+<p>现在，你可能困惑前面的权重项和偏置项的值是如何获得的呢？这就要用到感知器训练算法：将权重项和偏置项初始化为0，然后，利用下面的感知器规则迭代的修改和，直到训练完成。<br><img src="https://raw.githubusercontent.com/kylelua/manongtalk/master/img/2016-12-01-deep-learning/img10.png" alt=""></p>
+<p>其中:<br><img src="https://raw.githubusercontent.com/kylelua/manongtalk/master/img/2016-12-01-deep-learning/img11.png" alt=""></p>
+<p>w是与输入对应的权重项，b是偏置项。t是训练样本的实际值，一般称之为label。而是感知器的输出值，它是根据公式(1)计算得出。是一个称为学习速率的常数，其作用是控制每一步调整权的幅度。</p>
+<p>每次从训练数据中取出一个样本的输入向量x，使用感知器计算其输出y，再根据上面的规则来调整权重。每处理一个样本就调整一次权重。经过多轮迭代后（即全部的训练数据被反复处理多轮），就可以训练出感知器的权重，使之实现目标函数。</p>
+<p><strong>编程实战：实现感知器</strong></p>
+<p>对于程序员来说，没有什么比亲自动手实现学得更快了，而且，很多时候一行代码抵得上千言万语。接下来我们就将实现一个感知器。</p>
+<p>下面是一些说明：</p>
+<p>1) 使用python语言。python在机器学习领域用的很广泛，而且，写python程序真的很轻松。<br>2) 面向对象编程。面向对象是特别好的管理复杂度的工具，应对复杂问题时，用面向对象设计方法很容易将复杂问题拆解为多个简单问题，从而解救我们的大脑。<br>3) 没有使用numpy。numpy实现了很多基础算法，对于实现机器学习算法来说是个必备的工具。但为了降低读者理解的难度，下面的代码只用到了基本的python（省去您去学习numpy的时间）。<br>下面是感知器类的实现，非常简单。去掉注释只有27行，而且还包括为了美观（每行不超过60个字符）而增加的很多换行。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div></pre></td><td class="code"><pre><div class="line">class Perceptron(object):</div><div class="line">    def __init__(self, input_num, activator):</div><div class="line">        &apos;&apos;&apos;</div><div class="line">        初始化感知器，设置输入参数的个数，以及激活函数。</div><div class="line">        激活函数的类型为double -&gt; double</div><div class="line">        &apos;&apos;&apos;</div><div class="line">        self.activator = activator</div><div class="line">        # 权重向量初始化为0</div><div class="line">        self.weights = [0.0 for _ in range(input_num)]</div><div class="line">        # 偏置项初始化为0</div><div class="line">        self.bias = 0.0</div><div class="line">    def __str__(self):</div><div class="line">        &apos;&apos;&apos;</div><div class="line">        打印学习到的权重、偏置项</div><div class="line">        &apos;&apos;&apos;</div><div class="line">        return &apos;weights\t:%s\nbias\t:%f\n&apos; % (self.weights, self.bias)</div><div class="line">    def predict(self, input_vec):</div><div class="line">        &apos;&apos;&apos;</div><div class="line">        输入向量，输出感知器的计算结果</div><div class="line">        &apos;&apos;&apos;</div><div class="line">        # 把input_vec[x1,x2,x3...]和weights[w1,w2,w3,...]打包在一起</div><div class="line">        # 变成[(x1,w1),(x2,w2),(x3,w3),...]</div><div class="line">        # 然后利用map函数计算[x1*w1, x2*w2, x3*w3]</div><div class="line">        # 最后利用reduce求和</div><div class="line">        return self.activator(</div><div class="line">            reduce(lambda a, b: a + b,</div><div class="line">                   map(lambda (x, w): x * w,  </div><div class="line">                       zip(input_vec, self.weights))</div><div class="line">                , 0.0) + self.bias)</div><div class="line">    def train(self, input_vecs, labels, iteration, rate):</div><div class="line">        &apos;&apos;&apos;</div><div class="line">        输入训练数据：一组向量、与每个向量对应的label；以及训练轮数、学习率</div><div class="line">        &apos;&apos;&apos;</div><div class="line">        for i in range(iteration):</div><div class="line">            self._one_iteration(input_vecs, labels, rate)</div><div class="line">    def _one_iteration(self, input_vecs, labels, rate):</div><div class="line">        &apos;&apos;&apos;</div><div class="line">        一次迭代，把所有的训练数据过一遍</div><div class="line">        &apos;&apos;&apos;</div><div class="line">        # 把输入和输出打包在一起，成为样本的列表[(input_vec, label), ...]</div><div class="line">        # 而每个训练样本是(input_vec, label)</div><div class="line">        samples = zip(input_vecs, labels)</div><div class="line">        # 对每个样本，按照感知器规则更新权重</div><div class="line">        for (input_vec, label) in samples:</div><div class="line">            # 计算感知器在当前权重下的输出</div><div class="line">            output = self.predict(input_vec)</div><div class="line">            # 更新权重</div><div class="line">            self._update_weights(input_vec, output, label, rate)</div><div class="line">    def _update_weights(self, input_vec, output, label, rate):</div><div class="line">        &apos;&apos;&apos;</div><div class="line">        按照感知器规则更新权重</div><div class="line">        &apos;&apos;&apos;</div><div class="line">        # 把input_vec[x1,x2,x3,...]和weights[w1,w2,w3,...]打包在一起</div><div class="line">        # 变成[(x1,w1),(x2,w2),(x3,w3),...]</div><div class="line">        # 然后利用感知器规则更新权重</div><div class="line">        delta = label - output</div><div class="line">        self.weights = map(</div><div class="line">            lambda (x, w): w + rate * delta * x,</div><div class="line">            zip(input_vec, self.weights))</div><div class="line">        # 更新bias</div><div class="line">        self.bias += rate * delta</div></pre></td></tr></table></figure></p>
+<p>接下来，我们利用这个感知器类去实现and函数。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div></pre></td><td class="code"><pre><div class="line">def f(x):</div><div class="line">    &apos;&apos;&apos;</div><div class="line">    定义激活函数f</div><div class="line">    &apos;&apos;&apos;</div><div class="line">    return 1 if x &gt; 0 else 0</div><div class="line">def get_training_dataset():</div><div class="line">    &apos;&apos;&apos;</div><div class="line">    基于and真值表构建训练数据</div><div class="line">    &apos;&apos;&apos;</div><div class="line">    # 构建训练数据</div><div class="line">    # 输入向量列表</div><div class="line">    input_vecs = [[1,1], [0,0], [1,0], [0,1]]</div><div class="line">    # 期望的输出列表，注意要与输入一一对应</div><div class="line">    # [1,1] -&gt; 1, [0,0] -&gt; 0, [1,0] -&gt; 0, [0,1] -&gt; 0</div><div class="line">    labels = [1, 0, 0, 0]</div><div class="line">    return input_vecs, labels    </div><div class="line">def train_and_perceptron():</div><div class="line">    &apos;&apos;&apos;</div><div class="line">    使用and真值表训练感知器</div><div class="line">    &apos;&apos;&apos;</div><div class="line">    # 创建感知器，输入参数个数为2（因为and是二元函数），激活函数为f</div><div class="line">    p = Perceptron(2, f)</div><div class="line">    # 训练，迭代10轮, 学习速率为0.1</div><div class="line">    input_vecs, labels = get_training_dataset()</div><div class="line">    p.train(input_vecs, labels, 10, 0.1)</div><div class="line">    #返回训练好的感知器</div><div class="line">    return p</div><div class="line">if __name__ == &apos;__main__&apos;: </div><div class="line">    # 训练and感知器</div><div class="line">    and_perception = train_and_perceptron()</div><div class="line">    # 打印训练获得的权重</div><div class="line">    print and_perception</div><div class="line">    # 测试</div><div class="line">    print &apos;1 and 1 = %d&apos; % and_perception.predict([1, 1])</div><div class="line">    print &apos;0 and 0 = %d&apos; % and_perception.predict([0, 0])</div><div class="line">    print &apos;1 and 0 = %d&apos; % and_perception.predict([1, 0])</div><div class="line">    print &apos;0 and 1 = %d&apos; % and_perception.predict([0, 1])</div></pre></td></tr></table></figure></p>
+<p>将上述程序保存为perceptron.py文件，通过命令行执行这个程序，其运行结果为：</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;&lt;strong&gt;深度学习是啥&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;在人工智能领域，有一个方法叫机器学习。在机器学习这个方法里，有一类算法叫神经网络。神经网络如下图所示：&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;https://raw.githubusercontent.com/kyl
+    
+    </summary>
+    
+    
+      <category term="深度学习" scheme="http://manongtalk.com/tags/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/"/>
+    
+      <category term="人工智能" scheme="http://manongtalk.com/tags/%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD/"/>
+    
+  </entry>
+  
+  <entry>
     <title>如何胜任一个小型公司的技术总监？</title>
     <link href="http://manongtalk.com/2016/11/20/2016-11-20-superviser/"/>
     <id>http://manongtalk.com/2016/11/20/2016-11-20-superviser/</id>
     <published>2016-11-20T20:54:24.000Z</published>
-    <updated>2016-11-29T19:49:36.281Z</updated>
+    <updated>2016-11-29T19:50:28.401Z</updated>
     
     <content type="html"><![CDATA[<p><strong><em>从来没有一个资深的外科医生会放下手术刀，而转到手术室外面指手画脚。一个资深的程序员也不应该离开代码和文档的编写，而只是做做架构图。作为对一个复杂系统的负责人，必须亲手领导和参与建造，才能有足够的能力去负担起这个责任。</em></strong><br><a id="more"></a></p>
 <p><img src="https://raw.githubusercontent.com/kylelua/manongtalk/master/img/2016-11-22-supervisor/boss-vs-leader.jpg" alt=""></p>
@@ -903,41 +969,6 @@
     <summary type="html">
     
       &lt;p&gt;&lt;strong&gt;概念&lt;/strong&gt;&lt;br&gt;单例模式（Singleton Pattern）是最简单的设计模式之一。这种类型的设计模式属于创建型模式。在 GOF 书中给出的定义为：保证一个类仅有一个实例，并提供一个访问它的全局访问点。&lt;br&gt;
-    
-    </summary>
-    
-    
-      <category term="设计模式" scheme="http://manongtalk.com/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>设计模式概述</title>
-    <link href="http://manongtalk.com/2016/09/04/2016-09-04-design-pattern-overview/"/>
-    <id>http://manongtalk.com/2016/09/04/2016-09-04-design-pattern-overview/</id>
-    <published>2016-09-04T14:49:34.000Z</published>
-    <updated>2016-11-13T02:34:45.147Z</updated>
-    
-    <content type="html"><![CDATA[<p>在软件工程中，设计模式（design pattern）是对软件设计中普遍存在的各种问题，所提出的解决方案。设计模式并不是固定的一套代码，而是针对某一特定问题的具体解决思路与方案。可以认为是一种最佳实践，因为他是无数软件开发人员经过长时间的实践总结出来的。<br>提到设计模式不得不提《设计模式：可复用面向对象软件的基础》（Design Patterns – Elements of Reusable Object-Oriented Software） 一书。这本书由著名的四人帮——GoF(Gang of Four)编写，其中总结了23种设计模式，并将他们分成几个大类。<br><a id="more"></a><br><strong>设计模式的六大原则</strong></p>
-<p><strong>1、开闭原则（Open Close Principle）</strong></p>
-<p>开闭原则就是说对扩展开放，对修改关闭。在程序需要进行拓展的时候，不能去修改原有的代码，实现一个热插拔的效果。所以一句话概括就是：为了使程序的扩展性好，易于维护和升级。想要达到这样的效果，我们需要使用接口和抽象类，后面的具体设计中我们会提到这点。</p>
-<p><strong>2、里氏代换原则（Liskov Substitution Principle）</strong></p>
-<p>里氏代换原则(Liskov Substitution Principle LSP)面向对象设计的基本原则之一。 里氏代换原则中说，任何基类可以出现的地方，子类一定可以出现。 LSP是继承复用的基石，只有当衍生类可以替换掉基类，软件单位的功能不受到影响时，基类才能真正被复用，而衍生类也能够在基类的基础上增加新的行为。里氏代换原则是对“开-闭”原则的补充。实现“开-闭”原则的关键步骤就是抽象化。而基类与子类的继承关系就是抽象化的具体实现，所以里氏代换原则是对实现抽象化的具体步骤的规范。</p>
-<p><strong>3、依赖倒转原则（Dependence Inversion Principle）</strong><br>这个是开闭原则的基础，具体内容：真对接口编程，依赖于抽象而不依赖于具体。</p>
-<p><strong>4、接口隔离原则（Interface Segregation Principle）</strong><br>这个原则的意思是：使用多个隔离的接口，比使用单个接口要好。还是一个降低类之间的耦合度的意思，从这儿我们看出，其实设计模式就是一个软件的设计思想，从大型软件架构出发，为了升级和维护方便。所以上文中多次出现：降低依赖，降低耦合。</p>
-<p><strong>5、迪米特法则（最少知道原则）（Demeter Principle）</strong><br>为什么叫最少知道原则，就是说：一个实体应当尽量少的与其他实体之间发生相互作用，使得系统功能模块相对独立。</p>
-<p><strong>6、合成复用原则（Composite Reuse Principle）</strong><br>合成复用原则是尽量使用合成/聚合的方式，而不是使用继承。<br>其中前四种也是面向对象的四个基本原则。</p>
-<p><strong>设计模式分类</strong></p>
-<p>设计模式分为三种类型，共23种。<br><strong>创建型模式：</strong>单例模式、抽象工厂模式、建造者模式、工厂模式、原型模式。<br><strong>结构型模式：</strong>适配器模式、桥接模式、装饰模式、组合模式、外观模式、享元模式、代理模式。<br><strong>行为型模式：</strong>模版方法模式、命令模式、迭代器模式、观察者模式、中介者模式、备忘录模式、解释器模式（Interpreter模式）、状态模式、策略模式、职责链模式(责任链模式)、访问者模式。</p>
-<p><strong>23种设计模式简单介绍</strong></p>
-<p>按字典序排列简介如下。<br><strong>Abstract Factory（抽象工厂模式）：</strong>提供一个创建一系列相关或相互依赖对象的接口，而无需指定它们具体的类。<br><strong>Adapter（适配器模式）：</strong>将一个类的接口转换成客户希望的另外一个接口。Adapter模式使得原本由于接口不兼容而不能一起工作的那些类可以一起工作。<br><strong>Bridge（桥接模式）：</strong>将抽象部分与它的实现部分分离，使它们都可以独立地变化。<br><strong>Builder（建造者模式）：</strong>将一个复杂对象的构建与它的表示分离，使得同样的构建过程可以创建不同的表示。<br><strong>Chain of Responsibility（责任链模式）：</strong>为解除请求的发送者和接收者之间耦合，而使多个对象都有机会处理这个请求。将这些对象连成一条链，并沿着这条链传递该请求，直到有一个对象处理它。<br><strong>Command（命令模式）：</strong>将一个请求封装为一个对象，从而使你可用不同的请求对客户进行参数化；对请求排队或记录请求日志，以及支持可取消的操作。<br><strong>Composite（组合模式）：</strong>将对象组合成树形结构以表示“部分-整体”的层次结构。它使得客户对单个对象和复合对象的使用具有一致性。<br><strong>Decorator（装饰模式）：</strong>动态地给一个对象添加一些额外的职责。就扩展功能而言， 它比生成子类方式更为灵活。<br><strong>Facade（外观模式）：</strong>为子系统中的一组接口提供一个一致的界面，Facade模式定义了一个高层接口，这个接口使得这一子系统更加容易使用。<br><strong>Factory Method（工厂模式）：</strong>定义一个用于创建对象的接口，让子类决定将哪一个类实例化。Factory Method使一个类的实例化延迟到其子类。<br><strong>Flyweight（享元模式）：</strong>运用共享技术有效地支持大量细粒度的对象。<br><strong>Interpreter（解析器模式）：</strong>给定一个语言, 定义它的文法的一种表示，并定义一个解释器, 该解释器使用该表示来解释语言中的句子。<br><strong>Iterator（迭代器模式）：</strong>提供一种方法顺序访问一个聚合对象中各个元素，而又不需暴露该对象的内部表示。<br><strong>Mediator（中介模式）：</strong>用一个中介对象来封装一系列的对象交互。中介者使各对象不需要显式地相互引用，从而使其耦合松散，而且可以独立地改变它们之间的交互。<br><strong>Memento（备忘录模式）：</strong>在不破坏封装性的前提下，捕获一个对象的内部状态，并在该对象之外保存这个状态。这样以后就可将该对象恢复到保存的状态。<br><strong>Observer（观察者模式）：</strong>定义对象间的一种一对多的依赖关系,以便当一个对象的状态发生改变时,所有依赖于它的对象都得到通知并自动刷新。<br><strong>Prototype（原型模式）：</strong>用原型实例指定创建对象的种类，并且通过拷贝这个原型来创建新的对象。<br><strong>Proxy（代理模式）：</strong>为其他对象提供一个代理以控制对这个对象的访问。<br><strong>Singleton（单例模式）：</strong>保证一个类仅有一个实例，并提供一个访问它的全局访问点。 单例模式是最简单的设计模式之一，但是对于Java的开发者来说，它却有很多缺陷。<br><strong>State（状态模式）：</strong>允许一个对象在其内部状态改变时改变它的行为。对象看起来似乎修改了它所属的类。<br><strong>Strategy（策略模式）：</strong>定义一系列的算法,把它们一个个封装起来, 并且使它们可相互替换。本模式使得算法的变化可独立于使用它的客户。<br><strong>Template Method（模板方法模式）：</strong>定义一个操作中的算法的骨架，而将一些步骤延迟到子类中。Template Method使得子类可以不改变一个算法的结构即可重定义该算法的某些特定步骤。<br><strong>Visitor（访问者模式）：</strong>表示一个作用于某对象结构中的各元素的操作。它使你可以在不改变各元素的类的前提下定义作用于这些元素的新操作。</p>
-<p><strong>23种设计模式之间的关系</strong></p>
-<p><img src="https://raw.githubusercontent.com/kylelua/manongtalk/master/img/2016-09-04-design-pattern-overview/design-pattern.jpg" alt=""></p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;在软件工程中，设计模式（design pattern）是对软件设计中普遍存在的各种问题，所提出的解决方案。设计模式并不是固定的一套代码，而是针对某一特定问题的具体解决思路与方案。可以认为是一种最佳实践，因为他是无数软件开发人员经过长时间的实践总结出来的。&lt;br&gt;提到设计模式不得不提《设计模式：可复用面向对象软件的基础》（Design Patterns – Elements of Reusable Object-Oriented Software） 一书。这本书由著名的四人帮——GoF(Gang of Four)编写，其中总结了23种设计模式，并将他们分成几个大类。&lt;br&gt;
     
     </summary>
     
